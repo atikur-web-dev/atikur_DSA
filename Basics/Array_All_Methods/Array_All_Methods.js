@@ -1,330 +1,271 @@
 // ============================================
-// 📚 COMPLETE JAVASCRIPT ARRAY MASTERY GUIDE
-// 🎯 For: Web Dev + DSA + Software Engineering
-// 👨‍💻 Author: Atikur Rahman
+// ARRAY DECLARATION & BASIC METHODS
 // ============================================
 
-console.log("🚀 JavaScript Array Methods - Complete Guide\n");
+console.log("=== ARRAY DECLARATION & BASIC METHODS ===");
 
-// 1. CREATION METHODS
-console.log("1️⃣ ARRAY CREATION METHODS");
-console.log("=".repeat(50));
-
-// a) Literal (Most Common)
+// Different ways to declare arrays
 let arr1 = [1, 2, 3, 4, 5];
-console.log("Literal:", arr1);
+let arr2 = new Array(6, 7, 8, 9, 10);
+let arr3 = Array.from("hello"); // Creates array from iterable
+let arr4 = Array.of(1, 2, 3); // Creates array from arguments
+let arr5 = new Array(5).fill(0); // Creates array with 5 zeros
 
-// b) Constructor
-let arr2 = new Array(1, 2, 3);
-console.log("Constructor:", arr2);
+console.log("Array.from('hello'):", arr3);
+console.log("Array.of(1, 2, 3):", arr4);
+console.log("new Array(5).fill(0):", arr5);
 
-// c) Array.of() - Single numberでも array করে
-let arr3 = Array.of(7); // [7]
-let arr4 = Array.of(1, 2, 3); // [1, 2, 3]
-console.log("Array.of(7):", arr3);
-console.log("Array.of(1,2,3):", arr4);
+// ============================================
+// MUTATOR METHODS (Modify original array)
+// ============================================
 
-// d) Array.from() - Array-like to Array
-let str = "hello";
-let arr5 = Array.from(str); // ['h', 'e', 'l', 'l', 'o']
-console.log("Array.from('hello'):", arr5);
+console.log("\n=== MUTATOR METHODS ===");
 
-// e) Fill with values
-let arr6 = new Array(5).fill(0); // [0, 0, 0, 0, 0]
-console.log("new Array(5).fill(0):", arr6);
-
-// 2. ADD/REMOVE ELEMENTS (Mutable)
-console.log("\n2️⃣ ADD/REMOVE ELEMENTS");
-console.log("=".repeat(50));
-
+// 1. push() - Add to end
 let fruits = ["apple", "banana"];
-
-// a) push() - End এ add (Web Dev: Cart items add)
 fruits.push("orange", "mango");
-console.log("After push('orange','mango'):", fruits);
+console.log("After push:", fruits);
 
-// b) pop() - End থেকে remove (DSA: Stack operations)
-let last = fruits.pop();
-console.log(`Popped: ${last}, Remaining:`, fruits);
+// 2. pop() - Remove from end
+let lastFruit = fruits.pop();
+console.log("After pop:", fruits, "Removed:", lastFruit);
 
-// c) unshift() - Start এ add
-fruits.unshift("strawberry");
-console.log("After unshift('strawberry'):", fruits);
+// 3. unshift() - Add to beginning
+fruits.unshift("kiwi", "grape");
+console.log("After unshift:", fruits);
 
-// d) shift() - Start থেকে remove
-let first = fruits.shift();
-console.log(`Shifted: ${first}, Remaining:`, fruits);
+// 4. shift() - Remove from beginning
+let firstFruit = fruits.shift();
+console.log("After shift:", fruits, "Removed:", firstFruit);
 
-// e) splice() - Any position এ add/remove (Most Powerful!)
-// Software Engineering: Dynamic array manipulation
+// 5. splice() - Add/Remove at any position
 let numbers = [1, 2, 3, 4, 5];
-numbers.splice(2, 0, 99); // Index 2-এ 99 insert, nothing delete
-console.log("splice(2,0,99):", numbers);
+numbers.splice(2, 0, 2.5, 2.7); // Insert at index 2
+console.log("After splice insert:", numbers);
+numbers.splice(3, 2); // Remove 2 elements from index 3
+console.log("After splice remove:", numbers);
+numbers.splice(1, 1, 20); // Replace element at index 1
+console.log("After splice replace:", numbers);
 
-numbers.splice(1, 2); // Index 1 থেকে 2 elements delete
-console.log("splice(1,2):", numbers);
+// 6. reverse() - Reverse array in place
+numbers.reverse();
+console.log("After reverse:", numbers);
 
-numbers.splice(1, 1, 88, 77); // Replace 1 element with 2 elements
-console.log("splice(1,1,88,77):", numbers);
+// 7. sort() - Sort array in place
+let unsorted = [3, 1, 4, 1, 5, 9];
+unsorted.sort((a, b) => a - b); // Ascending
+console.log("Sorted ascending:", unsorted);
+unsorted.sort((a, b) => b - a); // Descending
+console.log("Sorted descending:", unsorted);
 
-// 3. ACCESS & SEARCH METHODS
-console.log("\n3️⃣ ACCESS & SEARCH METHODS");
-console.log("=".repeat(50));
+// 8. fill() - Fill array with static value
+let emptyArr = new Array(5);
+emptyArr.fill("X");
+console.log("After fill:", emptyArr);
+emptyArr.fill("Y", 2, 4); // Fill from index 2 to 4
+console.log("After fill with range:", emptyArr);
 
-let nums = [10, 20, 30, 20, 40, 50];
+// 9. copyWithin() - Copy portion within array
+let copyArr = [1, 2, 3, 4, 5];
+copyArr.copyWithin(0, 3); // Copy elements from index 3 to end to index 0
+console.log("After copyWithin:", copyArr);
 
-// a) indexOf() - First occurrence (DSA: Linear Search)
-console.log("indexOf(20):", nums.indexOf(20)); // 1
+// ============================================
+// ACCESSOR METHODS (Return new array/value)
+// ============================================
 
-// b) lastIndexOf() - Last occurrence
-console.log("lastIndexOf(20):", nums.lastIndexOf(20)); // 3
+console.log("\n=== ACCESSOR METHODS ===");
 
-// c) includes() - Exists or not (Web Dev: Check if feature enabled)
-console.log("includes(30):", nums.includes(30)); // true
-console.log("includes(100):", nums.includes(100)); // false
-
-// d) find() - First matching element (DSA: Condition-based search)
-let firstGreaterThan25 = nums.find((num) => num > 25);
-console.log("find(num > 25):", firstGreaterThan25); // 30
-
-// e) findIndex() - Index of first matching
-let indexGreaterThan25 = nums.findIndex((num) => num > 25);
-console.log("findIndex(num > 25):", indexGreaterThan25); // 2
-
-// f) findLast() & findLastIndex() (ES2023)
-// Note: Node.js 16+ এ available
-if (typeof nums.findLast === "function") {
-  console.log(
-    "findLast(num > 25):",
-    nums.findLast((num) => num > 25)
-  );
-}
-
-// 4. ITERATION METHODS (Web Dev: DOM Manipulation)
-console.log("\n4️⃣ ITERATION METHODS");
-console.log("=".repeat(50));
-
-let prices = [100, 200, 300, 400];
-
-// a) forEach() - Simple iteration (Most Common)
-console.log("forEach():");
-prices.forEach((price, index) => {
-  console.log(`  Item ${index}: $${price}`);
-});
-
-// b) map() - Transform array (Web Dev: API response mapping)
-let discountedPrices = prices.map((price) => price * 0.9);
-console.log("map(price => price*0.9):", discountedPrices);
-
-// c) filter() - Filter elements (Web Dev: Search filtering)
-let expensiveItems = prices.filter((price) => price > 250);
-console.log("filter(price > 250):", expensiveItems);
-
-// d) reduce() - Single value তৈরি (DSA: Sum, Max, Min)
-let total = prices.reduce((sum, price) => sum + price, 0);
-console.log("reduce((sum, price) => sum + price, 0):", total);
-
-// e) reduceRight() - Right to left reduce
-let concatRight = prices.reduceRight((str, price) => str + price, "");
-console.log("reduceRight():", concatRight);
-
-// f) some() - Any element passes test (Software Engineering: Validation)
-let hasPriceOver350 = prices.some((price) => price > 350);
-console.log("some(price > 350):", hasPriceOver350);
-
-// g) every() - All elements pass test
-let allPositive = prices.every((price) => price > 0);
-console.log("every(price > 0):", allPositive);
-
-// 5. TRANSFORMATION METHODS
-console.log("\n5️⃣ TRANSFORMATION METHODS");
-console.log("=".repeat(50));
-
-// a) slice() - Copy portion (DSA: Subarray problems)
-let original = [1, 2, 3, 4, 5];
-let sliced = original.slice(1, 4); // Index 1 থেকে 4 (4 exclude)
-console.log("slice(1,4):", sliced);
-console.log("Original untouched:", original);
-
-// b) concat() - Merge arrays (Web Dev: Combining data from multiple APIs)
+// 1. concat() - Merge arrays
 let arrA = [1, 2];
 let arrB = [3, 4];
 let arrC = [5, 6];
 let merged = arrA.concat(arrB, arrC);
-console.log("concat([3,4], [5,6]):", merged);
+console.log("After concat:", merged);
 
-// c) flat() - Flatten nested arrays (DSA: Tree to array)
-let nestedArray = [1, [2, [3, [4]]]];
-console.log("flat():", nestedArray.flat()); // Depth 1
-console.log("flat(2):", nestedArray.flat(2)); // Depth 2
-console.log("flat(Infinity):", nestedArray.flat(Infinity)); // Complete flatten
+// 2. slice() - Extract portion of array
+let original = [10, 20, 30, 40, 50];
+let sliced = original.slice(1, 4);
+console.log("Slice (1,4):", sliced);
+console.log("Original unchanged:", original);
 
-// d) flatMap() - map() then flat() (Software Engineering: Data processing)
-let sentences = ["Hello world", "JavaScript is awesome"];
+// 3. join() - Convert to string
+let joinArr = ["Hello", "World"];
+console.log("Join with space:", joinArr.join(" "));
+console.log("Join with comma:", joinArr.join(","));
+
+// 4. toString() & toLocaleString()
+console.log("toString():", joinArr.toString());
+console.log("toLocaleString():", [123456.78, new Date()].toLocaleString());
+
+// 5. indexOf() & lastIndexOf()
+let searchArr = [1, 2, 3, 4, 3, 5];
+console.log("indexOf(3):", searchArr.indexOf(3));
+console.log("lastIndexOf(3):", searchArr.lastIndexOf(3));
+console.log("indexOf(6):", searchArr.indexOf(6)); // Returns -1 if not found
+
+// 6. includes()
+console.log("includes(4):", searchArr.includes(4));
+console.log("includes(4, 4):", searchArr.includes(4, 4)); // Search from index 4
+
+// 7. flat() - Flatten nested arrays
+let nested = [1, [2, [3, [4]]]];
+console.log("flat():", nested.flat());
+console.log("flat(2):", nested.flat(2));
+console.log("flat(Infinity):", nested.flat(Infinity));
+
+// 8. flatMap() - Map then flatten
+let sentences = ["Hello world", "Good morning"];
 let words = sentences.flatMap((sentence) => sentence.split(" "));
-console.log("flatMap():", words);
+console.log("flatMap:", words);
 
-// 6. SORTING & REVERSING
-console.log("\n6️⃣ SORTING & REVERSING");
-console.log("=".repeat(50));
+// ============================================
+// ITERATION METHODS (Most important for DSA)
+// ============================================
 
-// a) sort() - Important for DSA!
-let unsorted = [40, 100, 1, 5, 25, 10];
+console.log("\n=== ITERATION METHODS ===");
 
-// Default (string sort - wrong for numbers!)
-let wrongSort = [...unsorted].sort();
-console.log("Wrong sort (default):", wrongSort);
+let nums = [1, 2, 3, 4, 5];
 
-// Correct numeric sort (DSA: Sorting algorithms)
-let ascending = [...unsorted].sort((a, b) => a - b);
-console.log("Correct sort ascending (a-b):", ascending);
+// 1. forEach() - Execute function for each element
+console.log("forEach:");
+nums.forEach((num, index) => console.log(`nums[${index}] = ${num}`));
 
-let descending = [...unsorted].sort((a, b) => b - a);
-console.log("Correct sort descending (b-a):", descending);
+// 2. map() - Transform each element
+let squares = nums.map((num) => num * num);
+console.log("Map squares:", squares);
 
-// String sort
-let names = ["Zahid", "Amina", "Bob", "cat"];
-names.sort();
-console.log("String sort:", names);
+// 3. filter() - Filter based on condition
+let evens = nums.filter((num) => num % 2 === 0);
+console.log("Filter evens:", evens);
 
-// Case-insensitive sort (Web Dev: User list sorting)
-let mixedCase = ["apple", "Banana", "cherry", "Date"];
-mixedCase.sort((a, b) => a.toLowerCase().localeCompare(b.toLowerCase()));
-console.log("Case-insensitive sort:", mixedCase);
+// 4. reduce() - Reduce to single value
+let sum = nums.reduce((acc, curr) => acc + curr, 0);
+console.log("Reduce sum:", sum);
+let max = nums.reduce((acc, curr) => Math.max(acc, curr), -Infinity);
+console.log("Reduce max:", max);
 
-// b) reverse() - Reverse array (DSA: Palindrome, reversal problems)
-let toReverse = [1, 2, 3, 4, 5];
-toReverse.reverse();
-console.log("reverse():", toReverse);
+// 5. reduceRight() - Reduce from right
+let strArr = ["H", "e", "l", "l", "o"];
+let reversedStr = strArr.reduceRight((acc, curr) => acc + curr, "");
+console.log("reduceRight reverse string:", reversedStr);
 
-// 7. ARRAY INFORMATION METHODS
-console.log("\n7️⃣ ARRAY INFORMATION METHODS");
-console.log("=".repeat(50));
+// 6. find() & findIndex()
+let users = [
+  { id: 1, name: "John" },
+  { id: 2, name: "Jane" },
+  { id: 3, name: "Bob" },
+];
+let user = users.find((u) => u.id === 2);
+console.log("Find user with id 2:", user);
+let userIndex = users.findIndex((u) => u.id === 2);
+console.log("findIndex user with id 2:", userIndex);
 
-let sample = [10, 20, 30, 40, 50];
+// 7. some() - Check if any element passes test
+let hasEven = nums.some((num) => num % 2 === 0);
+console.log("some(): Has even number?", hasEven);
 
-// a) length - Array length
-console.log("length:", sample.length);
+// 8. every() - Check if all elements pass test
+let allPositive = nums.every((num) => num > 0);
+console.log("every(): All positive?", allPositive);
 
-// b) isArray() - Check if array
-console.log("Array.isArray(sample):", Array.isArray(sample));
-console.log("Array.isArray({}):", Array.isArray({}));
-
-// c) at() - Modern indexing (ES2022)
-console.log("at(2):", sample.at(2)); // 30
-console.log("at(-1):", sample.at(-1)); // 50 (last element)
-console.log("at(-2):", sample.at(-2)); // 40
-
-// 8. STRING CONVERSION
-console.log("\n8️⃣ STRING CONVERSION");
-console.log("=".repeat(50));
-
-// a) toString() - Comma separated
-console.log("toString():", fruits.toString());
-
-// b) join() - Custom separator (Web Dev: URL params, CSV generation)
-console.log("join():", fruits.join()); // Same as toString()
-console.log("join(' - '):", fruits.join(" - "));
-console.log("join(''):", fruits.join("")); // No separator
-console.log("join(', '):", fruits.join(", ")); // CSV style
-
-// 9. ARRAY COPY METHODS (ES2023)
-console.log("\n9️⃣ MODERN METHODS (ES2023+)");
-console.log("=".repeat(50));
-
-// Note: These need newer Node.js versions
-let baseArray = [1, 2, 3, 4, 5];
-
-// a) toReversed() - Returns new reversed array (immutable)
-if (typeof baseArray.toReversed === "function") {
-  let reversedCopy = baseArray.toReversed();
-  console.log("toReversed():", reversedCopy);
-  console.log("Original unchanged:", baseArray);
-}
-
-// b) toSorted() - Returns new sorted array (immutable)
-if (typeof baseArray.toSorted === "function") {
-  let sortedCopy = baseArray.toSorted((a, b) => a - b);
-  console.log("toSorted():", sortedCopy);
-}
-
-// c) toSpliced() - Returns new spliced array (immutable)
-if (typeof baseArray.toSpliced === "function") {
-  let splicedCopy = baseArray.toSpliced(2, 0, 99);
-  console.log("toSpliced(2,0,99):", splicedCopy);
-}
-
-// d) with() - Returns new array with changed index (immutable)
-if (typeof baseArray.with === "function") {
-  let newArray = baseArray.with(2, 100); // Index 2 = 100
-  console.log("with(2,100):", newArray);
-}
-
-// 10. ARRAY ITERATORS (For Advanced Use)
-console.log("\n🔟 ITERATORS & GENERATORS");
-console.log("=".repeat(50));
-
-let iterArray = ["a", "b", "c"];
-
-// a) entries() - [index, value] pairs (DSA: When need both)
+// 9. entries(), keys(), values() - Iterators
 console.log("entries():");
-for (let [index, value] of iterArray.entries()) {
-  console.log(`  ${index}: ${value}`);
+for (let [index, value] of nums.entries()) {
+  console.log(`Index ${index}: ${value}`);
 }
 
-// b) keys() - Indexes only
-console.log("keys():", Array.from(iterArray.keys()));
+console.log("keys():");
+for (let key of nums.keys()) {
+  console.log(key);
+}
 
-// c) values() - Values only
-console.log("values():", Array.from(iterArray.values()));
+console.log("values():");
+for (let value of nums.values()) {
+  console.log(value);
+}
 
-// 11. PRACTICAL DSA EXAMPLES
-console.log("\n🎯 PRACTICAL DSA EXAMPLES USING ARRAY METHODS");
-console.log("=".repeat(50));
+// ============================================
+// DSA SPECIFIC METHODS & PATTERNS
+// ============================================
 
-// Example 1: Two Sum Problem (LeetCode #1)
-function twoSum(nums, target) {
-  let numMap = new Map();
-  for (let i = 0; i < nums.length; i++) {
-    let complement = target - nums[i];
-    if (numMap.has(complement)) {
-      return [numMap.get(complement), i];
-    }
-    numMap.set(nums[i], i);
+console.log("\n=== DSA SPECIFIC METHODS & PATTERNS ===");
+
+// 1. Two-pointer technique (for sorted arrays)
+let sortedd = [1, 2, 3, 4, 5, 6, 7];
+let target = 9;
+let left = 0,
+  right = sortedd.length - 1;
+while (left < right) {
+  let currentSum = sortedd[left] + sortedd[right];
+  if (currentSum === target) {
+    console.log(
+      `Two-pointer: Found ${sortedd[left]} + ${sortedd[right]} = ${target}`
+    );
+    break;
+  } else if (currentSum < target) {
+    left++;
+  } else {
+    right--;
   }
-  return [];
 }
 
-console.log("Two Sum [2,7,11,15], target=9:", twoSum([2, 7, 11, 15], 9));
-
-// Example 2: Maximum Subarray (Kadane's Algorithm)
-function maxSubArray(nums) {
-  let maxCurrent = nums[0];
-  let maxGlobal = nums[0];
-
-  for (let i = 1; i < nums.length; i++) {
-    maxCurrent = Math.max(nums[i], maxCurrent + nums[i]);
-    maxGlobal = Math.max(maxGlobal, maxCurrent);
-  }
-  return maxGlobal;
+// 2. Sliding window technique
+let windowArr = [1, 3, 2, 6, -1, 4, 1, 8, 2];
+let k = 5;
+let windowSum = 0;
+for (let i = 0; i < k; i++) {
+  windowSum += windowArr[i];
 }
+console.log(`Sliding window first sum: ${windowSum}`);
 
-console.log(
-  "Max Subarray [-2,1,-3,4,-1,2,1,-5,4]:",
-  maxSubArray([-2, 1, -3, 4, -1, 2, 1, -5, 4])
-);
+// 3. Prefix sum array
+let prefixArr = [1, 2, 3, 4, 5];
+let prefixSum = prefixArr.reduce((acc, curr, index) => {
+  acc.push(index === 0 ? curr : acc[index - 1] + curr);
+  return acc;
+}, []);
+console.log("Prefix sum array:", prefixSum);
 
-// Example 3: Remove Duplicates from Sorted Array
-function removeDuplicates(nums) {
-  return nums.filter((num, index) => nums.indexOf(num) === index);
+// 4. Chaining array methods (common in interviews)
+let complexArr = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+let result = complexArr
+  .filter((n) => n % 2 === 0) // Take even numbers
+  .map((n) => n * 2) // Double them
+  .reduce((a, b) => a + b, 0); // Sum them up
+console.log("Method chaining result:", result);
+
+// ============================================
+// ARRAY MANIPULATION PATTERNS
+// ============================================
+
+console.log("\n=== ARRAY MANIPULATION PATTERNS ===");
+
+// 1. Remove duplicates
+let dupArr = [1, 2, 2, 3, 4, 4, 5];
+let unique1 = [...new Set(dupArr)];
+let unique2 = dupArr.filter((item, index) => dupArr.indexOf(item) === index);
+console.log("Remove duplicates with Set:", unique1);
+console.log("Remove duplicates with filter:", unique2);
+
+// 2. Rotate array
+function rotateArray(arr, k) {
+  k = k % arr.length;
+  return [...arr.slice(-k), ...arr.slice(0, arr.length - k)];
 }
+console.log("Rotate [1,2,3,4,5] by 2:", rotateArray([1, 2, 3, 4, 5], 2));
 
-console.log(
-  "Remove Duplicates [1,1,2,2,3,4,4,5]:",
-  removeDuplicates([1, 1, 2, 2, 3, 4, 4, 5])
-);
+// 3. Flatten array recursively (interview question)
+function flattenDeep(arr) {
+  return arr.reduce(
+    (acc, val) =>
+      Array.isArray(val) ? acc.concat(flattenDeep(val)) : acc.concat(val),
+    []
+  );
+}
+console.log("Deep flatten:", flattenDeep([1, [2, [3, [4]], 5]]));
 
-// Example 4: Chunk Array (Web Dev: Pagination)
+// 4. Array chunking (common interview question)
 function chunkArray(arr, size) {
   const chunks = [];
   for (let i = 0; i < arr.length; i += size) {
@@ -332,68 +273,181 @@ function chunkArray(arr, size) {
   }
   return chunks;
 }
+console.log("Chunk array:", chunkArray([1, 2, 3, 4, 5, 6, 7], 3));
 
+// ============================================
+// PERFORMANCE CONSIDERATIONS
+// ============================================
+
+console.log("\n=== PERFORMANCE CONSIDERATIONS ===");
+
+// 1. push/pop vs unshift/shift
+console.log("push/pop are O(1), unshift/shift are O(n)");
+
+// 2. Spread operator vs concat
+let largeArr1 = new Array(10000).fill(1);
+let largeArr2 = new Array(10000).fill(2);
+
+console.time("concat");
+let concatResult = largeArr1.concat(largeArr2);
+console.timeEnd("concat");
+
+console.time("spread");
+let spreadResult = [...largeArr1, ...largeArr2];
+console.timeEnd("spread");
+
+// ============================================
+// COMMON INTERVIEW QUESTIONS IMPLEMENTATIONS
+// ============================================
+
+console.log("\n=== COMMON INTERVIEW QUESTIONS ===");
+
+// 1. Find missing number (1 to n)
+function findMissingNumber(arr, n) {
+  let expectedSum = (n * (n + 1)) / 2;
+  let actualSum = arr.reduce((a, b) => a + b, 0);
+  return expectedSum - actualSum;
+}
+console.log("Missing number in [1,2,3,5]:", findMissingNumber([1, 2, 3, 5], 5));
+
+// 2. Find duplicates
+function findDuplicates(arr) {
+  const seen = new Set();
+  const duplicates = new Set();
+
+  arr.forEach((item) => {
+    if (seen.has(item)) {
+      duplicates.add(item);
+    } else {
+      seen.add(item);
+    }
+  });
+
+  return Array.from(duplicates);
+}
 console.log(
-  "Chunk Array [1,2,3,4,5,6,7], size=3:",
-  chunkArray([1, 2, 3, 4, 5, 6, 7], 3)
+  "Duplicates in [1,2,3,2,4,5,4]:",
+  findDuplicates([1, 2, 3, 2, 4, 5, 4])
 );
 
-// 12. PERFORMANCE TIPS
-console.log("\n⚡ PERFORMANCE TIPS FOR DSA");
-console.log("=".repeat(50));
+// 3. Two Sum
+function twoSum(arr, target) {
+  const map = new Map();
+  for (let i = 0; i < arr.length; i++) {
+    const complement = target - arr[i];
+    if (map.has(complement)) {
+      return [map.get(complement), i];
+    }
+    map.set(arr[i], i);
+  }
+  return [];
+}
+console.log("Two sum indices for target 9:", twoSum([2, 7, 11, 15], 9));
 
-console.log("1. Use Set/Map for O(1) lookups instead of includes()");
-console.log("2. slice() is O(k) where k is slice size");
-console.log("3. push/pop are O(1), unshift/shift are O(n)");
-console.log("4. sort() is O(n log n)");
-console.log("5. flat() depth affects performance");
-
-// 13. COMMON USE CASES
-console.log("\n💼 COMMON USE CASES IN REAL PROJECTS");
-console.log("=".repeat(50));
-
-console.log("Web Development:");
-console.log("  - map(): API response transformation");
-console.log("  - filter(): Search/Filter functionality");
-console.log("  - reduce(): Shopping cart total");
-console.log("  - sort(): User list sorting");
-
-console.log("\nDSA:");
-console.log("  - Two Pointer: slice(), splice()");
-console.log("  - Sliding Window: slice()");
-console.log("  - Dynamic Programming: Array as DP table");
-
-console.log("\nSoftware Engineering:");
-console.log("  - Data Processing: flatMap(), reduce()");
-console.log("  - State Management: Immutable operations");
-console.log("  - Algorithm Implementation");
+// 4. Move zeros to end
+function moveZeros(arr) {
+  let nonZeroIndex = 0;
+  for (let i = 0; i < arr.length; i++) {
+    if (arr[i] !== 0) {
+      [arr[nonZeroIndex], arr[i]] = [arr[i], arr[nonZeroIndex]];
+      nonZeroIndex++;
+    }
+  }
+  return arr;
+}
+console.log("Move zeros:", moveZeros([0, 1, 0, 3, 12]));
 
 // ============================================
-// 🎯 PRACTICE PROBLEMS FOR EACH METHOD
+// ARRAY DESTRUCTURING
 // ============================================
 
-console.log("\n📝 PRACTICE PROBLEMS (Create separate files for each)");
-console.log("=".repeat(50));
+console.log("\n=== ARRAY DESTRUCTURING ===");
 
-const practiceProblems = [
-  { method: "map()", problem: "Double all numbers in array" },
-  { method: "filter()", problem: "Get all even numbers" },
-  { method: "reduce()", problem: "Find product of all numbers" },
-  { method: "find()", problem: "First number > 50" },
-  { method: "some()", problem: "Check if any negative numbers" },
-  { method: "every()", problem: "Check if all positive" },
-  { method: "sort()", problem: "Sort users by age" },
-  { method: "flat()", problem: "Flatten 3D array" },
-  { method: "splice()", problem: "Remove middle element" },
-  { method: "slice()", problem: "Get first 3 elements" },
-];
+// Basic destructuring
+let [first, second, ...rest] = [1, 2, 3, 4, 5];
+console.log(`Destructured: first=${first}, second=${second}, rest=${rest}`);
 
-practiceProblems.forEach((item, index) => {
-  console.log(`${index + 1}. ${item.method}: ${item.problem}`);
-});
+// Swapping variables
+let a = 1,
+  b = 2;
+[a, b] = [b, a];
+console.log(`Swapped: a=${a}, b=${b}`);
 
-console.log("\n" + "=".repeat(50));
-console.log("✅ Total Methods Covered: 35+");
-console.log("🔥 Ready for Web Dev, DSA & Software Engineering!");
-console.log("📁 Save this as array-mastery.js and practice daily!");
-console.log("=".repeat(50));
+// Skipping elements
+let [x, , y] = [1, 2, 3];
+console.log(`Skipped: x=${x}, y=${y}`);
+
+// Default values
+let [p = 10, q = 20] = [1];
+console.log(`Defaults: p=${p}, q=${q}`);
+
+// ============================================
+// ARRAY-LIKE OBJECTS CONVERSION
+// ============================================
+
+console.log("\n=== ARRAY-LIKE OBJECTS ===");
+
+// Convert arguments to array
+function exampleFunction() {
+  const argsArray = Array.from(arguments);
+  console.log("Arguments to array:", argsArray);
+}
+exampleFunction(1, 2, 3, 4);
+
+// Convert NodeList to array
+const mockNodeList = {
+  0: "div",
+  1: "span",
+  2: "p",
+  length: 3,
+};
+const nodeArray = Array.from(mockNodeList);
+console.log("NodeList-like to array:", nodeArray);
+
+// ============================================
+// MEMORY & PERFORMANCE TIPS
+// ============================================
+
+console.log("\n=== MEMORY & PERFORMANCE TIPS ===");
+
+// 1. Pre-allocate arrays when size is known
+let preAllocated = new Array(1000);
+console.log("Pre-allocated array length:", preAllocated.length);
+
+// 2. Use typed arrays for numeric data
+let typedArray = new Int32Array(10);
+typedArray[0] = 42;
+console.log("Typed array:", typedArray);
+
+// 3. Avoid excessive method chaining for large arrays
+console.log("Tip: Method chaining creates intermediate arrays");
+
+// ============================================
+// ES2023+ NEW METHODS
+// ============================================
+
+console.log("\n=== ES2023+ NEW METHODS ===");
+
+// 1. findLast() & findLastIndex()
+let arrLast = [1, 2, 3, 4, 3, 5];
+console.log(
+  "findLast(3):",
+  arrLast.findLast((x) => x === 3)
+);
+console.log(
+  "findLastIndex(3):",
+  arrLast.findLastIndex((x) => x === 3)
+);
+
+// 2. toReversed(), toSorted(), toSpliced() - Non-mutating versions
+let originalArr = [3, 1, 2];
+let reversed = originalArr.toReversed();
+let sorted = originalArr.toSorted();
+console.log("toReversed():", reversed, "Original:", originalArr);
+console.log("toSorted():", sorted, "Original:", originalArr);
+
+// 3. with() - Non-mutating update
+let updatedArr = originalArr.with(1, 99);
+console.log("with(1, 99):", updatedArr, "Original:", originalArr);
+
+console.log("\n=== END OF COMPREHENSIVE ARRAY GUIDE ===");
